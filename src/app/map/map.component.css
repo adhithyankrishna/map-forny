@@ -1,0 +1,331 @@
+
+
+
+.content{
+	display: flex;
+	flex-direction: column;
+
+}
+
+.navbar{
+	position: relative;
+	width: 100%;
+	height: 70px;
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(174, 198, 241);
+}
+
+.navinput{
+	width: 25%;
+	height: 36px;
+	outline: none;
+	border: none;
+	font-size: x-large;
+	margin: 1%;
+	border-radius: 10px;
+
+}
+
+.search{
+	width: 7%;
+	height: 36px;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	font-size: larger;
+	background-color: rgb(129, 238, 147);
+}
+
+.mapdiv{
+	width: 100%;
+	height: fit-content;
+	display: flex;
+    position: relative;
+	flex-direction: row;
+}
+.review{
+	max-height:100vh;
+	width:fit-content;
+	overflow-y: scroll;
+	text-align: center;
+	align-items: center;
+	
+}
+
+.review-cont{
+	display: flex;
+	
+	width: 390px;
+	background-color: rgb(206, 226, 243);
+	height: 100vh
+
+
+}
+.grid {
+	width: 180%;
+	margin-left: 30%;
+	background-color: rgba(255, 255, 255, 0);
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	border: 0.5px solid black;
+	overflow: auto; /* Added to ensure overflow content is visible */
+  }
+  
+  .grid-cell {
+	width: 10px;
+	height: 10px;
+	border: 1px solid #be1818;
+	box-sizing: border-box; /* Added to include border in the element's dimensions */
+  }
+  
+  .on {
+	background-color: green;
+  }
+  
+  .off {
+	background-color: red;
+  }
+  
+
+  .map{
+	width: 500px;
+	height: 100vh;
+  }
+
+  .admin{
+	position: absolute;
+	width:200px;
+	right: 0;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	height: 95vh;
+	background-color: rgb(206, 226, 243);
+  }
+
+  .adminbtn{
+	cursor: pointer;
+	width: 60%;
+	height: 40px;
+	outline: none;
+	border: none;
+	background-color: rgb(129, 238, 147);
+	border-radius: 5px;
+	margin: 5%;
+	font-size: larger;
+  }
+
+  .signoutbtn{
+	display: none;
+	position: absolute;
+	right: 0;
+	margin-right: 4%;
+	margin-top: 0%;
+	width: 4%;
+	height: 30px;
+	border-radius: 7px;
+	outline: none;
+	border: none;
+	background-color: rgb(245, 193, 51);
+	font-size: large;
+	cursor: pointer;
+  }
+
+  .signoutbtn:hover{
+	background-color: rgb(236, 215, 158);
+
+  }
+
+
+  .name{
+	width: 80%;
+	outline: none;
+	border: none;
+	height: 30px;
+	margin: 5%;
+	font-size: larger;
+	border-radius: 5px;
+	margin-top: 80%;
+  }
+
+  .adminbtn:hover{
+	background-color: rgb(188, 252, 198);
+  }
+
+
+  .imagediv{
+	margin-left: 10%;
+	width: 80%;
+	height: 40%;
+	background-color: aliceblue;
+
+  }
+
+  .review-image{
+	width: 80%;
+	height:fit-content;
+
+
+  }
+
+
+  .placeName{
+	color: rgb(2, 2, 70);
+	font-size: 190%;
+	font-weight: 700;
+	
+  }
+
+  .review-img{
+	
+	width: 100%;
+	height:fit-content;
+	
+  }
+
+  .image-container {
+	
+	overflow-x: auto;
+	white-space: nowrap;
+  }
+  
+  .review-image {
+	display: inline-block;
+	margin-right: 10%; 
+  }
+
+  .photos-heading{
+	color: rgb(2, 2, 70);
+	margin-top: 2%;
+	font-size:180%;
+	
+
+  }
+
+  .album{
+	background-color: #e3f1fa;
+	border: 1px solid rgb(6, 79, 122);
+	border-radius: 5px;
+	margin: 2%;
+	margin-top: 10%;
+  }
+
+  .reviewborder{
+	background-color: #e3f1fa;
+	text-align: left;
+	border: 1px solid rgb(6, 6, 122);
+	border-radius: 5px;
+	margin: 2%;
+	margin-top: 10%;
+  }
+
+  .review-details{
+	padding: 10%;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-top: 0%;
+	margin-bottom: 4%;
+	margin-left: 4%;
+	margin-right: 4%;
+	
+  }
+
+  .review-email{
+	color: rgb(10, 10, 141);
+	font-size: 100%;
+	margin-left: 5%;
+	margin-top: 10%;
+	
+	
+  }
+
+  .review-heading{
+	color: rgb(10, 10, 141);
+	margin-top: 2%;
+	font-size:180%;
+	margin-left: 20%;
+
+  }
+
+  .review-description{
+	color: rgb(10, 10, 141);
+	font-size: 120%;
+  }
+
+  .profile {
+	position: absolute;
+	right: 0;
+	width: 40px;
+	height: 40px;
+	background-color: rgba(240, 248, 255, 0);
+	border-radius: 50%; /* 100% to 50% for consistency */
+	margin-right: 3%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .profile mat-icon {
+	color: #1a0666;
+	font-size: 42px; /* Adjust the icon size */
+	width: 100%;
+	height: 100%;
+	line-height: 40px; /* Vertically center the icon */
+  }
+  
+
+  .reviewbtnare{
+	padding: 5%;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+  }
+
+  .reviewbtn{
+	outline: none;
+	
+	border: 1px solid rgb(9, 9, 87);
+	border-radius: 5px;
+	height: 55px;
+	width: 100%;
+	
+	background-color: rgba(44, 90, 240, 0);
+	color: rgb(9, 9, 87);
+	margin: 5%;
+	font-size: large;
+  }
+
+  .reviewbtn:hover{
+	background-color: rgb(140, 160, 224);
+	color: rgb(6, 6, 153);
+  }
+
+  
+  .map-container.blurred {
+	filter: blur(5px);
+	pointer-events: none; /* Disable interactions */
+  }
+  
+  .custom-dialog-container .mat-dialog-container {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000; /* Ensure this value is high enough to be above other content */
+  }
+
+  .star-container {
+	display: flex;
+	font-size: larger;
+	color: rgb(255, 174, 0);
+  }
+  

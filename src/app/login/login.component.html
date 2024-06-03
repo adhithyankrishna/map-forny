@@ -1,0 +1,30 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" class="login-form"  >
+      <mat-card class="login-card">
+        <mat-card-header class="header">
+          <mat-card-title class="header">Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="fill"  class="input">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" id="email" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" id="password" required>
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" aria-label="Toggle password visibility">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button> <!-- Use button instead of mat-icon -->
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="button" (click)="save()" class="loginbtn"> Login</button>
+          <a (click)="gosign()" class="sigclick">Don't have account  Click Here</a>
+        </mat-card-actions>
+        
+      </mat-card>
+     
+    </form>
+    
+  </div>
+  

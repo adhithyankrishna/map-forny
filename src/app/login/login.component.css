@@ -1,0 +1,69 @@
+.login-container{
+    background-image: url('../../assets/bb.jpg');
+    background-size: cover; /* Adjust the background size as needed */
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    
+}
+
+
+.login-form{
+    width: 40%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(126, 146, 189, 0);
+    border-radius: 20px;
+    padding: 5%;
+   
+   
+}
+
+.login-card{
+    background-color: rgb(206, 226, 243);
+    width: 100%;
+    height: 100%;
+}
+
+.header{
+    font-size: x-large;
+    margin-left: 4%;
+}
+
+.label{
+    font-size: 160%;
+   
+    color: rgb(4, 4, 66);
+   
+}
+
+.input{
+    width: 80%;
+    margin: 4%;
+}
+
+.loginbtn{
+    margin-left: 5%;
+}
+
+.custom-snackbar {
+    font-size: 16px; 
+  }
+  
+ 
+  .custom-snackbar .mat-snack-bar-container {
+    min-height: 64px; 
+  }
+
+
+  .sigclick{
+    margin-left: 35%;
+    color: blue;
+    cursor: pointer;
+    font-size: large;
+  }

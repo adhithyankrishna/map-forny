@@ -1,0 +1,71 @@
+<div class="profile">
+    <div class="top-div">
+
+        <span class="profile-image">
+            <div class="icon">{{profile.username[0]}}</div>
+        </span>
+
+        <div class="userDetail">
+            <span  class="name">{{profile.username}}</span>
+            <span class="email">{{profile.email}}</span>
+        </div>
+        <span class="logoutbtn-s">
+          <button mat-fab extended  class="logoutbtn" (click)="logout()">
+            <mat-icon class="logoutbtn-">logout</mat-icon>
+            LogOut
+          </button>
+        </span>
+        
+    </div>
+    <div class="content">
+        <div class="hist">
+            <div class="hist-heading">History</div>
+            <div class="histt">
+              <div *ngFor="let h of hist; let i = index" class="hist-div">
+                <span class="hist-content">
+                  <span class="close" (click)="deleteHistory(i,h.time_at)">
+                    <div class="close-x">X</div>
+                        </span>
+                        <div>{{h.source_place}}-----------------------{{h.destination_place}}</div>
+                        <div class="date">{{formatDate(h.time_at)}}</div>
+                    </span>
+                   
+                </div>
+            </div>
+
+        </div>
+        <div class="review">
+            <div class="rev-header">
+                Review
+            </div>
+            <div>
+                <div *ngFor="let re of review; let i = index" class="rev-div">
+                    <div class="cont">
+                      <span class="close-r" (click)="deleteReview(i,re.id)">
+                        <div class="close-x">X</div>
+                      </span>
+                      <mat-accordion>
+                        <mat-expansion-panel hideToggle class="custom-panel" style="border-radius: 30px;">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              {{ re.placeId }}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                              <div class="star-container">
+                                <span *ngFor="let _ of getStarArray(re.rating)" class="star">&#9733;</span>
+                              </div>
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <p>{{ re.description }}</p>
+                          <p>{{ formatDate(re.createdAt) }}</p>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    </div>
+                  </div>
+                  
+
+            </div>
+        </div>
+
+    </div>
+</div>

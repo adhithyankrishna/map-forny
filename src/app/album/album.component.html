@@ -1,0 +1,11 @@
+<div class="album">
+    <div class="side">
+      <div *ngFor="let image of data">
+        <img class="sideimg" [src]="image" (click)="change(image)"/>
+      </div>
+    </div>
+    <div class="main">
+      <img class="mainimg" [src]="main">
+    </div>
+  </div>
+  

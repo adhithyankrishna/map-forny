@@ -1,0 +1,55 @@
+<div class="content">
+  <div class="navbar">
+    <input id="source" type="text" class="navinput" [(ngModel)]="da.source" placeholder="Source">
+    <input id="destination" type="text" class="navinput" [(ngModel)]="da.destination" placeholder="Destination">
+    <button class="search" (click)="findPath()">Search</button>
+    <button class="signoutbtn" (click)="logout()">Logout</button>
+    <span class="profile" (click)="navigateProfile()">
+      <mat-icon>account_circle</mat-icon>
+    </span> 
+  </div>
+  <div class="mapdiv">
+    <div class="review-cont">
+      <div class="review">
+        <div class="placeName">{{placeNmae}}</div>
+        <div class="album">
+          <div *ngIf="reviews && reviews.length > 0" class="photos-heading">Photos</div>
+          <div class="image-container">
+            <span *ngFor="let review of reviews" class="review-image">
+              <img *ngIf="review.imagePath" [src]="review.imagePath" alt="Review Image" class="review-img" (click) = "navigateAlbum()">
+            </span>
+          </div>
+        </div> 
+        <div>
+          <div class="reviewbtnare"  *ngIf="placeNmae">
+             <button class="reviewbtn" (click)="openReviewDialog()">Add review</button>
+          </div>
+        </div>
+        <div class="reviewborder">
+          <div *ngIf="reviews && reviews.length > 0" class="review-heading">Review</div>
+          <div *ngFor="let review of reviews" class="review-item">
+            <div class="review-email">{{ review.email }}</div>
+            <div class="review-details">
+              <div class="review-description">{{ review.description }}</div>
+              <div class="review-rating">
+                <div class="star-container">
+                  <span *ngFor="let _ of getStarArray(review.rating)" class="star">&#9733;</span> <!-- Star symbol -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map">
+      <div class="grid"></div>
+      <canvas id="mycanva" style="width: 877px; height: 700px; border: 1px solid black;" (drag)="draw()"></canvas>
+    </div>
+    <div class="admin" *ngIf="role">
+      <button class="adminbtn" (click)="togglePath()">Path</button>
+      <button class="adminbtn" (click)="toggleBuilding()">Building</button>
+      <input class="name" id="name" type="text" placeholder="Name" [(ngModel)]="saveName"/>
+      <button class="adminbtn" (click)="send()">Save</button>
+    </div>
+  </div>
+</div>

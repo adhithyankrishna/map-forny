@@ -1,0 +1,21 @@
+.signup-container {
+  display: flex;
+ 
+    width: 100%;
+    align-items: center;
+    justify-content:center;
+    height:100vh;
+    
+  }
+
+  .container{
+    background-color: rgb(154, 179, 208);
+    padding: 5%;
+    width: 30%
+  }
+  
+  mat-form-field {
+    display: block;
+    margin-bottom: 16px;
+  }
+  
