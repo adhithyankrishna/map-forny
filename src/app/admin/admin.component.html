@@ -1,0 +1,29 @@
+<div class="admin">
+    <span class="menuo" *ngIf="!sidePanel">
+        <button (click)="togglepanel()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </span>
+    
+    <div class="sidePanel" *ngIf="sidePanel" >
+        <button (click)="togglepanel()" class="close" ><mat-icon>close</mat-icon></button>
+        <div class="searchdiv">
+            <input type="text" class="searchinp"/>
+            <button class="searchbtn"><mat-icon>search</mat-icon></button>
+        </div>
+        <button (click)="togglePath()" class="btn">
+            Path
+        </button>
+        <button  (click)="toggleBuilding()"  class="btn">
+            building
+        </button>
+    </div>
+    <div class="canvas">
+        <canvas id="myCanvas" width="10000px" height="1000px"
+            style="border: 1px solid rgb(8, 6, 73); "
+            (click)="onMouseCanavaClick($event)">
+        </canvas>
+    </div>
+    <div>
+    </div>
+</div>

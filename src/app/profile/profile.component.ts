@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -48,16 +49,16 @@ export class ProfileComponent implements OnInit {
 
   deleteHistory(index: number,time:String): void {   
     this.http.post(`http://localhost:8080/new/delteHistory?time=${time}`, { headers: this.headers }).subscribe((res: any) => {
-        console.log(res);
+       //console.log(res);
         this.hist.splice(index, 1); 
     },
   (error:any)=>{
-    console.log(error);
+    //console.log(error);
   });
   }
 
   deleteReview(index: number, id: String): void {
-    console.log("Deleting review with ID: " + id);
+   // console.log("Deleting review with ID: " + id);
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': token || ''
@@ -65,30 +66,35 @@ export class ProfileComponent implements OnInit {
   
     this.http.post(`http://localhost:8080/new/deleteReview?id=${id}`, null, { headers: headers }).subscribe(
       (res: any) => {
-        console.log(res);
+        //console.log(res);
         this.review.splice(index, 1);
       },
       (error: any) => {
-        console.log(error);
+        //console.log(error);
       }
     );
   }
   ngOnInit(): void {
     this.http.get("http://localhost:8080/new/GetReviewEmail", { headers: this.headers }).subscribe((res: any) => {
-      console.log(res);
+    // console.log(res);
       this.review = res;
-      console.log(this.review);
+     // console.log(this.review);
       
     });
     this.http.get("http://localhost:8080/new/getUser", { headers: this.headers }).subscribe((res: any) => {
-      console.log(res);
+     // console.log(res);
       this.profile  = res[0];
     });
 
     this.http.get("http://localhost:8080/new/getHistory", { headers: this.headers }).subscribe((res: any) => {
-      console.log(res);
+     // console.log(res);
       this.hist = res;
-      console.log(this.hist.source_place);
+      //console.log(this.hist.source_place);
     });
+  }
+
+
+  adminpage(){
+    this.router.navigate(['/admin']);
   }
 }

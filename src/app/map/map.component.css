@@ -65,24 +65,21 @@
 
 }
 .grid {
-	width: 180%;
 	margin-left: 30%;
-	background-color: rgba(255, 255, 255, 0);
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	border: 0.5px solid black;
-	overflow: auto; /* Added to ensure overflow content is visible */
+	margin-top: 20%;
+	display: grid;
+	grid-template-rows: repeat(40, 22px); /* Adjust the number of rows and cell size as needed */
+	grid-template-columns: repeat(40, 22px); /* Adjust the number of columns and cell size as needed */
+	gap: 0; /* No gap between the cells */
   }
   
   .grid-cell {
-	width: 10px;
-	height: 10px;
-	border: 1px solid #be1818;
-	box-sizing: border-box; /* Added to include border in the element's dimensions */
+	width: 22px; /* Adjust the cell size as needed */
+	height: 22px; /* Adjust the cell size as needed */
+	border: 0px solid black;
+	outline: none;
+	margin: 0; /* Ensure no margin is applied */
+	padding: 0; /* Ensure no padding is applied */
   }
   
   .on {

@@ -1,21 +1,44 @@
 .signup-container {
   display: flex;
- 
+  flex-direction: column;
     width: 100%;
     align-items: center;
-    justify-content:center;
+    justify-content:space-evenly;
     height:100vh;
     
   }
 
   .container{
+    display: flex;
+    flex-direction: row;
     background-color: rgb(154, 179, 208);
-    padding: 5%;
-    width: 30%
+    padding: 1%;
+    border-radius: 30px;
+    width: 50%;
+    height: 70vh;
   }
   
   mat-form-field {
     display: block;
     margin-bottom: 16px;
   }
+
+  .heading{
+    font-size: 300%;
+    color: rgb(3, 3, 141);
+  }
   
+
+  .globe{
+    background-color: blueviolets;
+    width: 50%;
+    height:100%;
+    margin-right: 10%;
+  }
+
+  .content{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }

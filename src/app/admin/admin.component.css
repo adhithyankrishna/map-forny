@@ -1,0 +1,87 @@
+.admin{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+   
+
+}
+
+
+.sidePanel{
+    align-items: center;
+    
+    position: absolute;
+    z-index: 9999;
+    width: 250px;
+    height: 100vh;
+    background-color: rgb(187, 211, 235);
+    display: flex;
+    flex-direction: column;
+}
+
+.menuo{
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    color: wheat;
+    background-color: rgb(8, 44, 111);
+}
+
+.canvas{
+    flex: 1;
+    display: flex;
+    width: fit-content;
+    overflow: scroll;
+    height: 100vh;
+    background-color: rgb(183, 203, 232);
+    border: 1px solid blue;
+
+}
+
+.btn{
+    width: 80%;
+    height:50px ;
+    margin-top: 10%;
+    outline: none;
+    border:none;
+}
+
+.close{
+    background-color: red;
+    color: white;
+
+}
+
+.searchdiv{
+    margin-top: 5%;
+    height: fit-content;
+    width: 80%;
+    background-color: rgb(238, 242, 245);
+    border-radius: 20px;
+    align-items: center;
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+
+}
+
+
+.searchinp{
+    margin-left: 5%;
+    margin-bottom: 2%;
+    height: 70%;
+    width: 80%;
+    outline: none;
+    border: none;
+    font-size: large;
+    background-color: rgba(6, 134, 29, 0);
+}
+
+.searchbtn{
+    background-color: rgba(240, 248, 255, 0);
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+}
+

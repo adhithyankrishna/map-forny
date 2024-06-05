@@ -43,13 +43,9 @@
     </div>
     <div class="map">
       <div class="grid"></div>
-      <canvas id="mycanva" style="width: 877px; height: 700px; border: 1px solid black;" (drag)="draw()"></canvas>
+      
     </div>
-    <div class="admin" *ngIf="role">
-      <button class="adminbtn" (click)="togglePath()">Path</button>
-      <button class="adminbtn" (click)="toggleBuilding()">Building</button>
-      <input class="name" id="name" type="text" placeholder="Name" [(ngModel)]="saveName"/>
-      <button class="adminbtn" (click)="send()">Save</button>
-    </div>
-  </div>
+    
+    
+  </div>  
 </div>

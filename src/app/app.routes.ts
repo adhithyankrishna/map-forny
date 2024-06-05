@@ -6,6 +6,8 @@ import { AlbumComponent } from './album/album.component';
 import { AddreviewComponent } from './addreview/addreview.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
+import { AddshapeComponent } from './addshape/addshape.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/map', pathMatch: 'full' },
@@ -15,5 +17,7 @@ export const routes: Routes = [
     { path: 'album', component: AlbumComponent },
     { path: 'addreview', component: AddreviewComponent },
     {path:'profile',component:ProfileComponent},
+    { path: 'addshape', component: AddshapeComponent },
+    {path:'admin',component:AdminComponent},
     
   ];
