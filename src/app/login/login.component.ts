@@ -23,9 +23,6 @@ import { SignupComponent } from '../signup/signup.component';
     ReactiveFormsModule ,
     MatIcon,
     MatSnackBarModule,
-    
-
-    
   ]
 })
 export class LoginComponent {
@@ -60,16 +57,14 @@ export class LoginComponent {
           this.router.navigate(["/map"]);
         }
       },(error:any)=>{
-        if (error.error === "User not found"){
+        if (error.error["error"] === "User not found"){
           this.openSnackBar("User not found");
         }
-        if (error.error === "Invalid credentials"){
+        if (error.error["error"] === "Invalid credentials"){
           console.log("serror",error.error);
           this.openSnackBar("Password incorrect")
-
         }
-        console.log(error);
-
+        console.log(error.error["error"]);
       });
     }
   }
@@ -80,8 +75,6 @@ export class LoginComponent {
     config.panelClass = ['custom-snackbar'];
     this.snackBar.open(message, 'Close', config);
   }
-
-
   gosign(){
     this.router.navigate(["/signup"]);
   }

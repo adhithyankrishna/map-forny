@@ -248,33 +248,33 @@
     background-color: rgba(255, 0, 0, 0);
     position: absolute;
     right: 0;
-    margin-right: 10%;
-    
+    margin-right: 5%;
     top: 0;
     margin-top: 1%;
 
 }
 
 .editbtn{
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 0, 0, 0);
     position: absolute;
-    right: 0;
-    margin-right: 40%;
-    
-    top: 0;
-    margin-top: 1%;
+    top: 25px;
+    right: 300px;
+    outline: none;
+    border: none;
+    background-color: rgb(15, 89, 180);
+    color: white;
+    border-radius: 20px;
+    width: 80px;
+    height: 50px;
 
 }
 .editbtn-s{
-    border-radius: 20px;
-    height: 60px;
-    width: 80px;
+
     outline: none;
     border: none;
-    background-color: rgb(224, 31, 31);
-    color:white;
+    color: white;
+    background-color: rgb(8, 34, 104);
+    border-radius: 20px;
+    
 }
 
 

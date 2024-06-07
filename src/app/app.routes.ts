@@ -10,7 +10,7 @@ import { AddshapeComponent } from './addshape/addshape.component';
 import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/map', pathMatch: 'full' },
+    
     {path:'signup', component:SignupComponent },
     { path: 'login', component: LoginComponent },
     { path: 'map', component: MapComponent, canActivate: [authgurd] },
@@ -19,5 +19,6 @@ export const routes: Routes = [
     {path:'profile',component:ProfileComponent},
     { path: 'addshape', component: AddshapeComponent },
     {path:'admin',component:AdminComponent},
+    { path: '**', redirectTo: '/map', pathMatch: 'full' },
     
   ];

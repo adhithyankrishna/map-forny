@@ -3,6 +3,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { AddshapeComponent } from '../addshape/addshape.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -29,7 +31,11 @@ export class AdminComponent implements OnInit {
   private startY!: number;
   private endX!: number;
   private endY!: number;
-  constructor(private http: HttpClient) {
+
+
+  constructor(private http: HttpClient,
+    private dialog: MatDialog,
+  ) {
     this.offset = { x: 0, y: 0 };
 
 
@@ -52,6 +58,8 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  
+
   togglepanel(){
     this.sidePanel = !this.sidePanel;
   }
@@ -59,6 +67,25 @@ export class AdminComponent implements OnInit {
   toggleBuilding(): void {
     this.isDrawing = !this.isDrawing;
     this.isBuilding = !this.isBuilding;
+  }
+
+  openReviewDialog(): void {
+    const dialogRef = this.dialog.open(AddshapeComponent, {
+      width: '700px',
+      panelClass: 'custom-dialog-container',
+      data: { }
+    });
+
+    const adminContainer = document.querySelector('.admin') as HTMLElement;
+    if (adminContainer) {
+      adminContainer.classList.add('blurred');
+    }
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (adminContainer) {
+        adminContainer.classList.remove('blurred');
+      }
+    });
   }
 
   togglePath(): void {
@@ -108,8 +135,8 @@ export class AdminComponent implements OnInit {
     this.ctx.fill();
    
     //console.log(event.clientX+" "+event.clientY+" "+rect.top+" "+rect.left);
-    //console.log(x+" "+y);
-    //console.log(this.offset.x+" "+this.offset.y);
+   // console.log(x+" "+y);
+    console.log(this.offset.x+" "+this.offset.y);
     console.log(this.zoomLevel);
     this.shape.push([x,y]);
     this.newshape.push([x/this.zoomLevel-this.offset.x,y/this.zoomLevel-this.offset.y]);
@@ -119,6 +146,7 @@ export class AdminComponent implements OnInit {
       if (this.shape.length >= 2 && this.isStartingPointReached()) {
         
         this.drawOnCanvas("");
+        this.openReviewDialog();
 
       }
     } if (this.isPath) {
@@ -149,9 +177,9 @@ export class AdminComponent implements OnInit {
     this.ctx.strokeStyle = 'blue';
     this.ctx.lineWidth = 0.1;
     this.ctx.beginPath();
-    this.ctx.moveTo(this.shape[0][0], this.shape[0][1]);
+    this.ctx.moveTo(this.shape[0][0], -this.shape[0][1]);
     for (let i = 1; i < this.shape.length; i++) {
-      this.ctx.lineTo(this.shape[i][0], this.shape[i][1]);
+      this.ctx.lineTo(this.shape[i][0],- this.shape[i][1]);
     }
     this.ctx.closePath();
     this.ctx.fillStyle = "#c99e6f";
@@ -162,13 +190,15 @@ export class AdminComponent implements OnInit {
     this.shape = [];
     this.newshape = [];
     this.ctx.restore();
+
+    
   }
 
   drawTextInShape(text: string): void {
     const minX = Math.min(...this.shape.map(point => point[0]));
     const maxX = Math.max(...this.shape.map(point => point[0]));
-    const minY = Math.min(...this.shape.map(point => point[1]));
-    const maxY = Math.max(...this.shape.map(point => point[1]));
+    const minY = Math.min(...this.shape.map(point => -point[1]));
+    const maxY = Math.max(...this.shape.map(point => -point[1]));
 
     const width = maxX - minX;
     const height = maxY - minY;
@@ -192,7 +222,6 @@ export class AdminComponent implements OnInit {
     this.ctx.strokeStyle = '#474234';
     this.ctx.lineWidth = 1;
     this.ctx.beginPath();
-
     this.ctx.moveTo(this.shape[0][0], this.shape[0][1]);
     for (let i = 1; i < this.shape.length; i++) {
       //console.log(i);
@@ -220,7 +249,6 @@ export class AdminComponent implements OnInit {
     this.panStart = { x: event.clientX, y: event.clientY };
   }
 
-  
   onCanvasMouseMove(event: MouseEvent): void {
     if (this.panStart) {
       const dx = event.clientX - this.panStart.x;
@@ -245,11 +273,6 @@ export class AdminComponent implements OnInit {
     this.initdrawcanava();
     this.ctx.restore();
   }
-
-  
-
-
-
 
 }
 

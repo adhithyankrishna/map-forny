@@ -12,7 +12,6 @@ export class AuthService {
       this.token = localStorage.getItem('token');
     }
   }
-
   login(): boolean {
     return !!this.token;
   }

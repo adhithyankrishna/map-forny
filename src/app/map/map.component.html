@@ -1,51 +1,73 @@
 <div class="content">
-  <div class="navbar">
-    <input id="source" type="text" class="navinput" [(ngModel)]="da.source" placeholder="Source">
-    <input id="destination" type="text" class="navinput" [(ngModel)]="da.destination" placeholder="Destination">
-    <button class="search" (click)="findPath()">Search</button>
-    <button class="signoutbtn" (click)="logout()">Logout</button>
+  
+  <div class="mapdiv">
     <span class="profile" (click)="navigateProfile()">
       <mat-icon>account_circle</mat-icon>
-    </span> 
-  </div>
-  <div class="mapdiv">
-    <div class="review-cont">
-      <div class="review">
-        <div class="placeName">{{placeNmae}}</div>
-        <div class="album">
-          <div *ngIf="reviews && reviews.length > 0" class="photos-heading">Photos</div>
-          <div class="image-container">
-            <span *ngFor="let review of reviews" class="review-image">
-              <img *ngIf="review.imagePath" [src]="review.imagePath" alt="Review Image" class="review-img" (click) = "navigateAlbum()">
-            </span>
+    </span>
+    <div class="matsearchdiv">
+      <span class="matsearchspan">
+        <input class="mat-input" placeholder="Source" [(ngModel)]="da.source" (click)="toggleSearch()"/>
+        <mat-icon class="search-icon" (click)="findPath()" >search</mat-icon>
+      </span>
+      <div *ngIf="isSearch" style="margin-top: 10%;">
+      <span>
+        <input class="mat-input" placeholder="destination" [(ngModel)]="da.destination"/>
+      </span>
+      </div>
+    </div>
+    <!--
+    <span class="menubtn" (click)="togglePanel()">
+      <button><mat-icon>menu</mat-icon></button>
+    </span>-->
+    <div class="review-cont"  *ngIf="isPanel">
+      
+      
+        <span class="close" (click)="togglePanel()">
+          <button><mat-icon>close</mat-icon></button>
+        </span>
+        
+        <div class="review">
+          <div class="placeName">{{placeNmae}}</div>
+          <div class="album">
+            <div *ngIf="reviews && reviews.length > 0" class="photos-heading">Photos</div>
+            <div class="image-container">
+              <span *ngFor="let review of reviews" class="review-image">
+                <img *ngIf="review.imagePath" [src]="review.imagePath" alt="Review Image" class="review-img"
+                  (click)="navigateAlbum()">
+              </span>
+            </div>
           </div>
-        </div> 
-        <div>
-          <div class="reviewbtnare"  *ngIf="placeNmae">
-             <button class="reviewbtn" (click)="openReviewDialog()">Add review</button>
+          <div>
+            <div class="reviewbtnare" *ngIf="placeNmae">
+              <button class="reviewbtn" (click)="openReviewDialog()">Add review</button>
+            </div>
           </div>
-        </div>
-        <div class="reviewborder">
-          <div *ngIf="reviews && reviews.length > 0" class="review-heading">Review</div>
-          <div *ngFor="let review of reviews" class="review-item">
-            <div class="review-email">{{ review.email }}</div>
-            <div class="review-details">
-              <div class="review-description">{{ review.description }}</div>
-              <div class="review-rating">
-                <div class="star-container">
-                  <span *ngFor="let _ of getStarArray(review.rating)" class="star">&#9733;</span> <!-- Star symbol -->
+          <div *ngIf="avgergereview" style="display: flex; flex-direction: row; align-items: center; text-align: center; margin-left: 17%;">
+            Average Rating: <div class="review-rating">
+              <div class="star-container">
+                <span *ngFor="let _ of getStarArray(avgergereview)" class="star">&#9733;</span> <!-- Star symbol -->
+              </div>
+            </div>
+          </div>
+          <div class="reviewborder">
+            <div *ngIf="reviews && reviews.length > 0" class="review-heading">Review</div>
+            <div *ngFor="let review of reviews" class="review-item">
+              <div class="review-email">{{ review.email }}</div>
+              <div class="review-details">
+                <div class="review-description">{{ review.description }}</div>
+                <div class="review-rating">
+                  <div class="star-container">
+                    <span *ngFor="let _ of getStarArray(review.rating)" class="star">&#9733;</span> <!-- Star symbol -->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      
     </div>
     <div class="map">
       <div class="grid"></div>
-      
     </div>
-    
-    
-  </div>  
+  </div>
 </div>

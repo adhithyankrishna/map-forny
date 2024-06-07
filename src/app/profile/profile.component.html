@@ -2,12 +2,12 @@
     <div class="top-div">
 
         <span class="profile-image">
-            <div class="icon">{{profile.username[0]}}</div>
+            <div class="icon">{{profile.username[0]||"hvhvchgvhvh"}}</div>
         </span>
 
         <div class="userDetail">
-            <span  class="name">{{profile.username}}</span>
-            <span class="email">{{profile.email}}</span>
+            <span  class="name">{{profile.username||"bjvj"}}</span>
+            <span class="email">{{profile.email||"jvjvhjvjhv"}}</span>
         </div>
         <span class="logoutbtn-s">
           <button mat-fab extended  class="logoutbtn" (click)="logout()">

@@ -40,7 +40,8 @@
 
 .btn{
     width: 80%;
-    height:50px ;
+    height:40px ;
+    border-radius: 20px;
     margin-top: 10%;
     outline: none;
     border:none;
@@ -85,3 +86,8 @@
 
 }
 
+
+.admin.blurred {
+	filter: blur(5px);
+	pointer-events: none; /* Disable interactions */
+  }
