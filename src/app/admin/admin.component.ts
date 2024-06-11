@@ -70,10 +70,28 @@ export class AdminComponent implements OnInit {
   }
 
   openReviewDialog(): void {
+    console.log(this.newshape);
+    let obj = {
+      type:"Feeature",
+      properties:{
+        name:"iceland"
+      },
+      geometry:{
+        type:"Polygon",
+        coordinates:[this.newshape]
+      }
+
+    }
+    console.log(this.mapData);
+
+    this.mapData.features.push(obj);
+    this.newshape = [];
+
+
     const dialogRef = this.dialog.open(AddshapeComponent, {
       width: '700px',
       panelClass: 'custom-dialog-container',
-      data: { }
+      data: this.mapData,
     });
 
     const adminContainer = document.querySelector('.admin') as HTMLElement;
@@ -144,7 +162,7 @@ export class AdminComponent implements OnInit {
     if (this.isBuilding) {
       this.drawPathOncanva();
       if (this.shape.length >= 2 && this.isStartingPointReached()) {
-        
+        console.log("hia");
         this.drawOnCanvas("");
         this.openReviewDialog();
 
@@ -172,14 +190,16 @@ export class AdminComponent implements OnInit {
     if (this.shape.length < 2) {
       return;
     }
+
+    
     
     this.ctx.save();
     this.ctx.strokeStyle = 'blue';
     this.ctx.lineWidth = 0.1;
     this.ctx.beginPath();
-    this.ctx.moveTo(this.shape[0][0], -this.shape[0][1]);
+    this.ctx.moveTo(this.shape[0][0], this.shape[0][1]);
     for (let i = 1; i < this.shape.length; i++) {
-      this.ctx.lineTo(this.shape[i][0],- this.shape[i][1]);
+      this.ctx.lineTo(this.shape[i][0], this.shape[i][1]);
     }
     this.ctx.closePath();
     this.ctx.fillStyle = "#c99e6f";
@@ -188,7 +208,7 @@ export class AdminComponent implements OnInit {
   
     this.drawTextInShape(name);
     this.shape = [];
-    this.newshape = [];
+    
     this.ctx.restore();
 
     
@@ -197,14 +217,14 @@ export class AdminComponent implements OnInit {
   drawTextInShape(text: string): void {
     const minX = Math.min(...this.shape.map(point => point[0]));
     const maxX = Math.max(...this.shape.map(point => point[0]));
-    const minY = Math.min(...this.shape.map(point => -point[1]));
-    const maxY = Math.max(...this.shape.map(point => -point[1]));
+    const minY = Math.min(...this.shape.map(point => point[1]));
+    const maxY = Math.max(...this.shape.map(point => point[1]));
 
     const width = maxX - minX;
     const height = maxY - minY;
 
     let fontSize = Math.min(width / text.length, height / 2);
-   // if (fontSize < 10) fontSize = 10;
+  
 
     this.ctx.font = `${fontSize}px Arial`;
     this.ctx.fillStyle = 'black';
@@ -220,15 +240,14 @@ export class AdminComponent implements OnInit {
   drawPathOncanva() {
     this.ctx.save();
     this.ctx.strokeStyle = '#474234';
-    this.ctx.lineWidth = 1;
+    if (this.isPath)  this.ctx.lineWidth = 10;
+    else this.ctx.lineWidth = 1;
     this.ctx.beginPath();
     this.ctx.moveTo(this.shape[0][0], this.shape[0][1]);
     for (let i = 1; i < this.shape.length; i++) {
-      //console.log(i);
       this.ctx.lineTo(this.shape[i][0], this.shape[i][1]);
     }
     this.ctx.stroke();
-    //console.log(this.shape);
     this.ctx.restore();
   }
 

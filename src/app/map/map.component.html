@@ -1,5 +1,4 @@
 <div class="content">
-  
   <div class="mapdiv">
     <span class="profile" (click)="navigateProfile()">
       <mat-icon>account_circle</mat-icon>
@@ -11,21 +10,19 @@
       </span>
       <div *ngIf="isSearch" style="margin-top: 10%;">
       <span>
-        <input class="mat-input" placeholder="destination" [(ngModel)]="da.destination"/>
+        <input class="mat-input" placeholder="destination" [(ngModel)]="da.destination" (keydown)="EnterKey($event)"/>
       </span>
       </div>
+      <div *ngIf="unit" class="unit">{{unit}} Units</div>
     </div>
     <!--
     <span class="menubtn" (click)="togglePanel()">
       <button><mat-icon>menu</mat-icon></button>
     </span>-->
     <div class="review-cont"  *ngIf="isPanel">
-      
-      
         <span class="close" (click)="togglePanel()">
           <button><mat-icon>close</mat-icon></button>
         </span>
-        
         <div class="review">
           <div class="placeName">{{placeNmae}}</div>
           <div class="album">
@@ -68,6 +65,7 @@
     </div>
     <div class="map">
       <div class="grid"></div>
+      <canvas class="overlay-canvas"></canvas>
     </div>
   </div>
 </div>

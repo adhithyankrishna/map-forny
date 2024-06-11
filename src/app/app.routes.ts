@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { AddshapeComponent } from './addshape/addshape.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdmingridComponent } from './admingrid/admingrid.component';
 
 export const routes: Routes = [
     
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path:'profile',component:ProfileComponent},
     { path: 'addshape', component: AddshapeComponent },
     {path:'admin',component:AdminComponent},
+    {path:'adming',component:AdmingridComponent},
     { path: '**', redirectTo: '/map', pathMatch: 'full' },
     
   ];

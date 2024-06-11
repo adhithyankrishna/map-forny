@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="mapdiv"  (keydown)="enterkey($event)">
+        <div class="menu" (click)="togglePanel()"><mat-icon>menu</mat-icon></div>
+        <div class="side-panel" *ngIf="isPanel">
+            <div (click)="togglePanel()"><mat-icon>close</mat-icon></div>
+            <div class="btn-div">
+                <button class="btn" (click)="togglePath()" [class.disable-btn]="isBuilding" [class.clicked-btn]="isPath" [disabled]="isBuilding">Path</button>
+                <button class="btn" (click)="toggleBuilding()" [class.disable-btn]="isPath" [class.clicked-btn]="isBuilding" [disabled]="isPath">Block</button>
+            </div>
+            <div class="btn-div">
+                <button class="btn">reset</button>
+                <button class="btn" (click)="toggleSave()">save</button>
+            </div>
+
+        </div>
+        <div class="map">
+            <div class="grid"></div>
+            <canvas class="overlay-canvas"></canvas>
+        </div>
+        <div class="popup" *ngIf="isSave">
+            <div class="popup-cont">
+                <div (click)="toggleSave()" class="closebtn">
+                    <mat-icon>close</mat-icon>
+                </div>
+                <input class="saveinput" placeholder="Name" [(ngModel)]="saveName"/>
+                <button class="btn" style="width: 100px; margin-left: 42%;" (click)="send()"><mat-icon>done</mat-icon></button>
+            </div>
+        </div>
+    </div>
+</div>

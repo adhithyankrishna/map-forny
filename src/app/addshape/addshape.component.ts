@@ -36,6 +36,8 @@ export class AddshapeComponent {
     public dialogRef: MatDialogRef<AddshapeComponent>,
     private fb: FormBuilder,
   ) {
+
+    console.log(data);
     this.reviewForm = this.fb.group({
 
     });

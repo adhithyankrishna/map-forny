@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
     
     if (this.authService.login()) { 
     } else {
-      
       this.router.navigateByUrl('/login');
     }
   }

@@ -97,6 +97,6 @@ export class ProfileComponent implements OnInit {
   }
 
   adminpage() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/adming']);
   }
 }

@@ -9,12 +9,7 @@
         <mat-label>Type Of Shape</mat-label>
         <textarea  matInput formControlName="description" placeholder="Type of shape"></textarea>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Rating</mat-label>
-      <mat-select formControlName="rating">
-        <mat-option *ngFor="let rating of [1, 2, 3, 4, 5]" [value]="rating">{{ rating }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    
     <input type="file" accept="image/png, image/jpeg" />
     <button mat-raised-button type="submit" [disabled]="!reviewForm.valid">Submit</button>
   </form>

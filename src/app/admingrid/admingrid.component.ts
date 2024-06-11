@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,11 +14,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 @Component({
   selector: 'app-map',
   standalone: true,
-  templateUrl: './map.component.html',
+  templateUrl: './admingrid.component.html',
   imports: [HttpClientModule, FormsModule, CommonModule, MatSnackBarModule, MatIconModule, ScrollingModule],
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./admingrid.component.css']
 })
-export class MapComponent implements OnInit {
+export class AdmingridComponent implements OnInit {
   numRow!: number;
   numColm!: number;
   gridData: any;
@@ -32,13 +31,14 @@ export class MapComponent implements OnInit {
   da: data;
   saveName: any;
   role: String = "";
-  avgergereview: string | null;
+
+  isSave = false;
+
   mapper: any;
   reviews: any[] = [];
   mapData: any;
   isPanel = false;
   isSearch = false;
-  unit:number|null;
 
   shape: any[] = [];
 
@@ -50,8 +50,7 @@ export class MapComponent implements OnInit {
     private dialog: MatDialog,
   ) {
     this.da = new data();
-    this.avgergereview = null;
-    this.unit = null;
+
   }
 
   ngOnInit(): void {
@@ -66,7 +65,7 @@ export class MapComponent implements OnInit {
       (data: any) => {
         this.mapper = data;
         this.gridData = data.data;
-        console.log(this.gridData);
+        console.log(this.mapper);
         this.numRow = this.mapper.numRows;
         this.numColm = this.mapper.numCols;
         this.draw();
@@ -77,17 +76,7 @@ export class MapComponent implements OnInit {
     );
   }
 
-  togglePanel() {
-    this.isPanel = !this.isPanel;
-    if (!this.togglePanel) {
-      this.avgergereview = null;
-      this.reviews = [];
-    }
-  }
 
-  toggleSearch() {
-    this.isSearch = !this.isSearch;
-  }
 
   draw(): void {
     const gridContainer = document.querySelector(".grid") as HTMLElement;
@@ -117,7 +106,7 @@ export class MapComponent implements OnInit {
         const centroidX = xCoords.reduce((sum, x) => sum + x, 0) / xCoords.length;
         const centroidY = yCoords.reduce((sum, y) => sum + y, 0) / yCoords.length;
 
-        
+
         ctx.fillStyle = "black";
         ctx.font = "14px Arial";
         ctx.textAlign = "center";
@@ -135,7 +124,7 @@ export class MapComponent implements OnInit {
         cell.setAttribute('object', '');
         cell.style.width = `${cellWidth}px`;
         cell.style.height = `${cellHeight}px`;
-        cell.style.border = "0px solid black";
+        cell.style.border = "0.5px solid black";
         cell.style.outline = "none";
         cell.style.marginTop = '0';
         cell.style.boxSizing = 'border-box';
@@ -190,22 +179,32 @@ export class MapComponent implements OnInit {
     }
   }
 
+  @HostListener('window:keydown', ['$event'])
+  enterkey(event:any){
+    if(this.object.length>0 && event.key ==='Enter'){
+      this.isSave = !this.isSave;
+    }
+  }
+
   onmousedown(event: any): void {
     let cell = event.target;
     let obj = cell.getAttribute("object");
     if (obj !== '') {
       this.placeNmae = obj;
-      this.leftclick(obj);
-      this.togglePanel();
+
+
     } else {
       this.drawing = true;
       this.object = [];
       this.draw();
       this.drawLine(event.target);
     }
-    if (this.isPanel && obj === '') {
-      this.togglePanel();
-    }
+
+  }
+
+  toggleSave(){
+    if (this.object.length>0)
+    this.isSave = !this.isSave;
   }
 
   onmouseup(event: any): void {
@@ -219,6 +218,7 @@ export class MapComponent implements OnInit {
   }
 
   drawLine(cell: HTMLElement): void {
+
     if (this.drawing) {
       const row = cell.getAttribute('data-row');
       const col = cell.getAttribute('data-col');
@@ -235,9 +235,7 @@ export class MapComponent implements OnInit {
     }
   }
 
-  getStarArray(rating: String): number[] {
-    return Array(Number(rating)).fill(0);
-  }
+
 
   toggleBuilding(): void {
     this.isBuilding = !this.isBuilding;
@@ -247,44 +245,20 @@ export class MapComponent implements OnInit {
     this.isPath = !this.isPath;
   }
 
-  logout(): void {
-    localStorage.setItem("token", "");
-    localStorage.setItem("role", "");
-    this.router.navigate(["/login"]);
+
+  togglePanel() {
+    this.isPanel = !this.isPanel;
   }
 
   onRightClick(event: any): void {
     event.preventDefault();
   }
 
-  findPath(): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': '' + localStorage.getItem('token')
-      })
-    };
-    this.initiateData();
-
-    this.http.post(`http://localhost:8080/new/server?mapName=large_map&source=${this.da.source}&dest=${this.da.destination}`, {}, httpOptions).subscribe((res: any) => {
-      if (res) {
-        this.gridData = res;
-        this.rerender();
-      } else {
-      }
-    }, (error: any) => {
-      if (error.error === "java.lang.IllegalArgumentException: There no path between source and destination ") {
-        this.openSnackBar("There is not path")
-      }
-    });
-  }
 
   rerender(): void {
-    this.unit = 0;
     for (let i = 0; i < this.gridData.length; i++) {
       for (let j = 0; j < this.gridData[0].length; j++) {
         if (this.gridData[i][j] === -3) {
-          this.unit++;
           let cell = document.querySelector(`.grid-cell[data-row="${i}"][data-col="${j}"]`) as HTMLElement;
           if (cell) {
             cell.style.backgroundColor = "yellow";
@@ -292,31 +266,8 @@ export class MapComponent implements OnInit {
         }
       }
     }
-
-    
   }
 
-  leftclick(object: String): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      });
-       
-      this.http.get(`http://localhost:8080/new/GetReviewPlace?placeId=${object}`, { headers: headers })
-        .subscribe(
-          (res: any) => {
-            if (res) {
-              this.reviews = res[0].data;
-              this.avgergereview = res[1].avg;
-              console.log(this.reviews);
-            }
-          },
-          (error: any) => {
-          }
-        );
-    }
-  }
   openReviewDialog(): void {
     const dialogRef = this.dialog.open(AddreviewComponent, {
       width: '700px',
@@ -338,7 +289,8 @@ export class MapComponent implements OnInit {
 
   send() {
     let uniqueObject = [...new Set(this.object.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-
+    this.mapper["numRows"] = 60;
+    this.mapper["numCols"] = 150;
     if (this.isPath) {
       if (!this.mapper.data.path) {
         this.mapper.data["path"] = {};
@@ -352,29 +304,17 @@ export class MapComponent implements OnInit {
     }
 
     this.http.post(`http://localhost:8080/new/saveData`, this.mapper).subscribe((res: any) => {
+      console.log(res);
+      this.isSave = !this.isSave;
+      this.object = [];
       this.initiateData();
     }, (error: any) => {
+      console.log("error",error);
+
     })
   }
 
-  EnterKey(event: any) {
-    if (event.key === "Enter") {
-      this.findPath();
-    }
-  }
 
-  navigateAlbum() {
-    let sample = [];
-    for (let rev of this.reviews) {
-      sample.push(rev.imagePath);
-    }
-    this.dataService.setData(sample);
-    this.router.navigate(['/album'])
-  }
-
-  navigateProfile() {
-    this.router.navigate(['/profile'])
-  }
 
   openSnackBar(message: string): void {
     const config = new MatSnackBarConfig();

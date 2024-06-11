@@ -1,0 +1,183 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: scroll;
+    background-color: #96ace4;
+}
+
+
+
+.mapdiv {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+.grid {
+
+    display: grid;
+
+    grid-template-rows: repeat(60, 22px);
+    grid-template-columns: repeat(150, 22px);
+    gap: 0;
+}
+
+.grid-cell {
+    width: 22px;
+    height: 22px;
+    border: 0px solid black;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.map {
+    margin-top: 2%;
+    margin-left: 1%;
+    overflow: scroll;
+    width: 100%;
+    height: fit-content;
+}
+
+
+
+.map-container.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+    /* Disable interactions */
+}
+
+.custom-dialog-container .mat-dialog-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    /* Ensure this value is high enough to be above other content */
+}
+
+
+
+.grid-container {
+    position: relative;
+    width: fit-content;
+}
+
+.grid {
+    position: absolute;
+    z-index: 1;
+}
+
+.overlay-canvas {
+    position: absolute;
+    background-color: none;
+    ;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.menu {
+    background-color: aliceblue;
+    position: fixed;
+    text-align: center;
+    font-size: xx-large;
+    height: 60px;
+    width: 40px;
+    top: 5px;
+    z-index: 99;
+    left: 20px;
+
+
+}
+
+.side-panel {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 100vh;
+    position: fixed;
+    z-index: 999;
+    align-items: center;
+}
+
+.btn-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.btn {
+    background-color: rgb(67, 78, 143);
+    color: white;
+    height: 42px;
+    width: 50px;
+    width: 80%;
+    margin: 3%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.disable-btn{
+    background-color: #82899b;
+    cursor: not-allowed;
+    
+}
+
+.clicked-btn{
+    background-color: rgb(122, 197, 113);
+}
+
+.popup{
+    background-color: azure;
+    width: 800px;
+    top: 200px;
+    border-radius: 20px;
+    left: 550px;
+    z-index: 99;
+    height: 500px;
+    position:fixed;
+    
+}
+
+.popup-cont{
+    background-color: #cbdaf7;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.closebtn{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    color: red;
+    font-size: larger;
+}
+
+.saveinput{
+    margin-left: 30%;
+    margin-top: 5%;
+    outline: none;
+    border: none;
+    width: 300px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: larger;
+}
+
