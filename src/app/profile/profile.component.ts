@@ -19,8 +19,11 @@ export class ProfileComponent implements OnInit {
   review: any;
   panelOpenState = false;
   headers: any;
+  role:any;
 
   constructor(private http: HttpClient, private router: Router) {
+
+    this.role = localStorage.getItem("role");
     const token = localStorage.getItem('token');
     this.headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

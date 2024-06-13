@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-addreview',
@@ -23,13 +24,16 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
+
   ],
   templateUrl: './addreview.component.html',
   styleUrls: ['./addreview.component.css']
 })
 export class AddreviewComponent {
   reviewForm: FormGroup;
+  isLoading = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -71,9 +75,11 @@ export class AddreviewComponent {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       });
-
+      this.isLoading = true;
       this.http.post(`http://localhost:8080/new/addreview?${params}`, formData,{headers}).subscribe(
+       
         (response) => {
+          this.isLoading = false;
           console.log('Review submitted successfully', response);
           this.dialogRef.close();
         },

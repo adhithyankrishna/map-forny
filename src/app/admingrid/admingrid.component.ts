@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -21,9 +21,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 export class AdmingridComponent implements OnInit {
   numRow!: number;
   numColm!: number;
+  isDelete = false;
   gridData: any;
   drawing = false;
-  placeNmae: String = "";
+  placeNmae: string = "";
   isPath = false;
   isBuilding = false;
   object: any[] = [];
@@ -31,7 +32,7 @@ export class AdmingridComponent implements OnInit {
   da: data;
   saveName: any;
   role: String = "";
-
+  headers:any;
   isSave = false;
 
   mapper: any;
@@ -50,6 +51,10 @@ export class AdmingridComponent implements OnInit {
     private dialog: MatDialog,
   ) {
     this.da = new data();
+    const token = localStorage.getItem('token');
+    this.headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
   }
 
@@ -191,7 +196,10 @@ export class AdmingridComponent implements OnInit {
     let obj = cell.getAttribute("object");
     if (obj !== '') {
       this.placeNmae = obj;
-
+      console.log(this.placeNmae);
+      if (this.isDelete){
+        this.deleteBlock();
+      }
 
     } else {
       this.drawing = true;
@@ -200,6 +208,24 @@ export class AdmingridComponent implements OnInit {
       this.drawLine(event.target);
     }
 
+  }
+
+  deleteBlock(){
+    delete this.mapper.data.building[this.placeNmae];
+    console.log(this.mapper);
+    this.http.post(`http://localhost:8080/new/saveData`, this.mapper,{ headers: this.headers }).subscribe((res: any) => {
+      console.log(res);
+      
+      this.initiateData();
+    }, (error: any) => {
+      console.log("error",error);
+
+    })
+    
+  }
+
+  toggleDelete(){
+    this.isDelete = !this.isDelete;
   }
 
   toggleSave(){
@@ -287,6 +313,11 @@ export class AdmingridComponent implements OnInit {
     });
   }
 
+  resetObject(){
+    this.object = [];
+    this.draw();
+  }
+
   send() {
     let uniqueObject = [...new Set(this.object.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
     this.mapper["numRows"] = 60;
@@ -303,7 +334,7 @@ export class AdmingridComponent implements OnInit {
       this.mapper.data.building[this.saveName] = uniqueObject;
     }
 
-    this.http.post(`http://localhost:8080/new/saveData`, this.mapper).subscribe((res: any) => {
+    this.http.post(`http://localhost:8080/new/saveData`, this.mapper,{ headers: this.headers }).subscribe((res: any) => {
       console.log(res);
       this.isSave = !this.isSave;
       this.object = [];

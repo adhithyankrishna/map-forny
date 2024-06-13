@@ -1,27 +1,40 @@
 <div class="content">
   <div class="mapdiv">
+    
     <span class="profile" (click)="navigateProfile()">
       <mat-icon>account_circle</mat-icon>
     </span>
     <div class="matsearchdiv">
       <span class="matsearchspan">
-        <input class="mat-input" placeholder="Source" [(ngModel)]="da.source" (click)="toggleSearch()"/>
+        <input class="mat-input" placeholder="Source" [(ngModel)]="da.source" (click)="toggleSearch()" (ngModelChange)="getsource()"/>
         <mat-icon class="search-icon" (click)="findPath()" >search</mat-icon>
       </span>
+      <div *ngIf="sug.length>0 && ss" class="sugg">
+        <span *ngFor="let s of sug" class="review-image">
+           <div class="suggEl" (click)="changeSource(s)">{{s}}</div>
+        </span>
+      </div>
       <div *ngIf="isSearch" style="margin-top: 10%;">
       <span>
-        <input class="mat-input" placeholder="destination" [(ngModel)]="da.destination" (keydown)="EnterKey($event)"/>
+        <input class="mat-input" placeholder="destination" [(ngModel)]="da.destination" (keydown)="EnterKey($event)" (ngModelChange)="getDest()"/>
       </span>
+      <div *ngIf="sug.length>0 && sd" class="sugg">
+        <span *ngFor="let s of sug" class="review-image">
+           <div class="suggEl"  (click)="changeDest(s)">{{s}}</div>
+        </span>
       </div>
-      <div *ngIf="unit" class="unit">{{unit}} Units</div>
+      </div>
+      <div *ngIf="unit" class="unit">
+        {{unit}} Units
+        <div style="margin-left: 30%;" (click)="initiateData()"><mat-icon style="color: blue; cursor: pointer;">refresh</mat-icon></div>
+
+      </div>
     </div>
-    <!--
-    <span class="menubtn" (click)="togglePanel()">
-      <button><mat-icon>menu</mat-icon></button>
-    </span>-->
+    
+   
     <div class="review-cont"  *ngIf="isPanel">
         <span class="close" (click)="togglePanel()">
-          <button><mat-icon>close</mat-icon></button>
+          <button><mat-icon style="color: red;">close</mat-icon></button>
         </span>
         <div class="review">
           <div class="placeName">{{placeNmae}}</div>

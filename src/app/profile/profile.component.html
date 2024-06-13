@@ -15,7 +15,7 @@
             LogOut
           </button>
         </span>
-        <span class="editbtn">
+        <span class="editbtn" *ngIf="role==='admin'">
           <button mat-fab extended  class="editbtn-s" (click)="adminpage()">
             <mat-icon class="editbtn-s">edit</mat-icon>
             Edit Map
@@ -68,8 +68,6 @@
                       </mat-accordion>
                     </div>
                   </div>
-                  
-
             </div>
         </div>
 

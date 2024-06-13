@@ -52,10 +52,10 @@ export class AdminComponent implements OnInit {
     this.canvas.addEventListener('mouseup', this.onCanvasMouseUp.bind(this));
     this.canvas.addEventListener('mouseleave', this.onCanvasMouseUp.bind(this));
 
-    this.http.get('assets/data.json').subscribe((res: any) => {
-      this.mapData = res;
+   // this.http.get('assets/data.json').subscribe((res: any) => {
+      this.mapData=[];
       this.initdrawcanava();
-    });
+    //});
   }
 
   

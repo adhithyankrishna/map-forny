@@ -11,16 +11,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DataService } from '../services/data.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-map',
   standalone: true,
   templateUrl: './map.component.html',
-  imports: [HttpClientModule, FormsModule, CommonModule, MatSnackBarModule, MatIconModule, ScrollingModule],
+  imports: [HttpClientModule, FormsModule, CommonModule, MatSnackBarModule, MatIconModule, ScrollingModule, MatProgressSpinnerModule],
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
   numRow!: number;
+
   numColm!: number;
   gridData: any;
   drawing = false;
@@ -38,7 +40,11 @@ export class MapComponent implements OnInit {
   mapData: any;
   isPanel = false;
   isSearch = false;
-  unit:number|null;
+  unit: number | null;
+  sug = [];
+  laskClick:string = "";
+  sd = false;
+  ss = false;
 
   shape: any[] = [];
 
@@ -70,6 +76,7 @@ export class MapComponent implements OnInit {
         this.numRow = this.mapper.numRows;
         this.numColm = this.mapper.numCols;
         this.draw();
+        this.unit =null;
       },
       (error: any) => {
         alert("there is network issue");
@@ -117,7 +124,7 @@ export class MapComponent implements OnInit {
         const centroidX = xCoords.reduce((sum, x) => sum + x, 0) / xCoords.length;
         const centroidY = yCoords.reduce((sum, y) => sum + y, 0) / yCoords.length;
 
-        
+
         ctx.fillStyle = "black";
         ctx.font = "14px Arial";
         ctx.textAlign = "center";
@@ -196,16 +203,18 @@ export class MapComponent implements OnInit {
     if (obj !== '') {
       this.placeNmae = obj;
       this.leftclick(obj);
-      this.togglePanel();
+      if (!this.isPanel) {
+        this.togglePanel();
+      }
+      
     } else {
-      this.drawing = true;
-      this.object = [];
-      this.draw();
-      this.drawLine(event.target);
+     
     }
     if (this.isPanel && obj === '') {
       this.togglePanel();
     }
+
+    this.laskClick = obj;
   }
 
   onmouseup(event: any): void {
@@ -293,7 +302,7 @@ export class MapComponent implements OnInit {
       }
     }
 
-    
+
   }
 
   leftclick(object: String): void {
@@ -302,10 +311,12 @@ export class MapComponent implements OnInit {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       });
-       
+
+
       this.http.get(`http://localhost:8080/new/GetReviewPlace?placeId=${object}`, { headers: headers })
         .subscribe(
           (res: any) => {
+
             if (res) {
               this.reviews = res[0].data;
               this.avgergereview = res[1].avg;
@@ -313,10 +324,70 @@ export class MapComponent implements OnInit {
             }
           },
           (error: any) => {
+            console.log(error);
           }
+
         );
+
+
     }
   }
+
+  getsource() {
+    if (this.da.source === '') {
+      this.sug = [];
+      this.ss = false;
+    }
+    this.ss = true;
+    //if (this.da.source.length>=3){
+    this.getSugg(this.da.source);
+    //}
+  }
+
+  getDest() {
+    if (this.da.destination === '') {
+      this.sug = [];
+      this.sd = false;
+    }
+    this.sd = true;
+
+    this.getSugg(this.da.destination);
+  }
+
+  getSugg(place: string) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      });
+      this.http.get(`http://localhost:8080/new/getSuggestion?query=${place}`, { headers: headers })
+        .subscribe(
+          (res: any) => {
+            this.sug = res;
+            console.log(res);
+          },
+          (error: any) => {
+            console.log(error);
+          }
+
+        );
+    }
+
+  }
+
+  changeSource(value: string) {
+    this.da.source = value;
+    this.sug = [];
+    this.ss = false;
+  }
+
+
+  changeDest(value: string) {
+    this.da.destination = value;
+    this.sd = false;
+    this.sug = [];
+  }
+
   openReviewDialog(): void {
     const dialogRef = this.dialog.open(AddreviewComponent, {
       width: '700px',

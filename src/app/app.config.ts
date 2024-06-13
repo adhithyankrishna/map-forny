@@ -5,7 +5,8 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialog } from '@angular/material/dialog';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),MatDialog, provideAnimationsAsync()],
+  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),MatDialog, provideAnimationsAsync(),provideHttpClient()],
 };

@@ -51,6 +51,7 @@
 
 .close{
 	position: relative;
+	color: red;
 	top: 2px;
 	left: 2px;
 	z-index: 9999;
@@ -142,6 +143,7 @@
 
 
   .placeName{
+	margin-top: 5%;
 	color: rgb(2, 2, 70);
 	font-size: 190%;
 	font-weight: 700;
@@ -350,6 +352,23 @@
 	margin-top: 10%;
 	font-size: larger;
 	margin-left: 8%;
+	display: flex;
+	color: blue;
+	flex-direction: row;
+	width: 100%;
   }
 
+  .sugg{
+	
+	cursor: pointer;
+  }
+
+  .suggEl{
+	font-size: large;
+	margin-top: 1%;
+
+  }
+
+
+ 
   

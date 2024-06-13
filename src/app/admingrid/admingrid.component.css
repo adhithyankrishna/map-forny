@@ -104,11 +104,11 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 250px;
     height: 100vh;
     position: fixed;
     z-index: 999;
-    align-items: center;
+    
 }
 
 .btn-div{
@@ -181,3 +181,21 @@
     font-size: larger;
 }
 
+.cancel{
+	width: 60px;
+	height: 50px;
+	position: fixed;
+	left: 850px;
+	top: 5px;
+    z-index: 999;
+	
+   
+  }
+
+  .cancel-s{
+    width: 100%;
+    height: 100%;
+    font-size: 400%;
+    color: #000000;
+    
+  }

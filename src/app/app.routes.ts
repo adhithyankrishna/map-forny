@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AddshapeComponent } from './addshape/addshape.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdmingridComponent } from './admingrid/admingrid.component';
+import { AdminGuard } from './services/admin.guard';
 
 export const routes: Routes = [
     
@@ -18,9 +19,9 @@ export const routes: Routes = [
     { path: 'album', component: AlbumComponent },
     { path: 'addreview', component: AddreviewComponent },
     {path:'profile',component:ProfileComponent},
-    { path: 'addshape', component: AddshapeComponent },
-    {path:'admin',component:AdminComponent},
-    {path:'adming',component:AdmingridComponent},
+    { path: 'addshape', component: AddshapeComponent ,canActivate:[AdminGuard]},
+    {path:'admin',component:AdminComponent ,canActivate:[AdminGuard]},
+    {path:'adming',component:AdmingridComponent,canActivate:[AdminGuard]},
     { path: '**', redirectTo: '/map', pathMatch: 'full' },
     
   ];
